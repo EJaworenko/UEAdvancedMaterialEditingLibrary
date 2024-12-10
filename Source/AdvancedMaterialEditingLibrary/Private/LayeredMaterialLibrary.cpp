@@ -80,6 +80,10 @@ bool ULayeredMaterialLibrary::AssignBlendLayer(UMaterialInstance* Instance, int3
 	return false;
 }
 
+/*
+ The following functions are for Layer Parameters.
+*/
+
 float ULayeredMaterialLibrary::GetLayeredMaterialScalarParameterValue(UMaterialInstance* Instance, FName ParameterName, int32 LayerIndex)
 {
 	float Result = 0.f;
@@ -99,6 +103,27 @@ bool ULayeredMaterialLibrary::SetLayeredMaterialScalarParameterValue(UMaterialIn
 		return true;
 	}
 	return false;
+}
+
+FLinearColor ULayeredMaterialLibrary::GetLayeredMaterialVectorParameterValue(UMaterialInstance* Instance, FName ParameterName, int32 LayerIndex)
+{
+    FLinearColor Result = FLinearColor(0, 0, 0, 0);
+    if (Instance)
+    {
+        Instance->GetVectorParameterValue(FHashedMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::LayerParameter, LayerIndex), Result);
+    }
+    return Result;
+}
+
+bool ULayeredMaterialLibrary::SetLayeredMaterialVectorParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, int32 LayerIndex, FLinearColor Value)
+{
+    if (Instance)
+    {
+        Instance->SetVectorParameterValueEditorOnly(FMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::LayerParameter, LayerIndex), Value);
+        RefreshEditorMaterialInstance(Instance);
+        return true;
+    }
+    return false;
 }
 
 bool ULayeredMaterialLibrary::GetLayeredMaterialStaticSwitchParameterValue(UMaterialInstance* Instance, FName ParameterName, int32 LayerIndex)
@@ -143,4 +168,172 @@ bool ULayeredMaterialLibrary::SetLayeredMaterialTextureParameterValue(UMaterialI
 		return true;
 	}
 	return false;
+}
+
+FVector4 ULayeredMaterialLibrary::GetLayeredMaterialChannelMaskParameterValue(UMaterialInstance* Instance, FName ParameterName, int32 LayerIndex)
+{
+    FLinearColor Result = FLinearColor(0, 0, 0, 0);
+    if (Instance)
+    {
+        Instance->GetVectorParameterValue(FHashedMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::LayerParameter, LayerIndex), Result);
+    }
+    return FVector4(Result.R, Result.G, Result.B, Result.A);
+}
+
+bool ULayeredMaterialLibrary::SetLayeredMaterialChannelMaskParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, int32 LayerIndex, FVector4 Value)
+{
+    if (Instance)
+    {
+        FLinearColor Color(Value.X, Value.Y, Value.Z, Value.W);
+        Instance->SetVectorParameterValueEditorOnly(FMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::LayerParameter, LayerIndex), Color);
+        RefreshEditorMaterialInstance(Instance);
+        return true;
+    }
+    return false;
+}
+
+/*
+ The following functions are for Blend Parameters.
+*/
+
+float ULayeredMaterialLibrary::GetLayeredMaterialBlendScalarParameterValue(UMaterialInstance* Instance, FName ParameterName, int32 LayerIndex)
+{
+    float Result = 0.f;
+    if (Instance)
+    {
+		int32 adjustedIndex = LayerIndex - 1; // Same offset as AssignBlendLayer
+        Instance->GetScalarParameterValue(FHashedMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::BlendParameter, adjustedIndex), Result);
+    }
+    return Result;
+}
+
+bool ULayeredMaterialLibrary::SetLayeredMaterialBlendScalarParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, int32 LayerIndex, float Value)
+{
+    if (Instance)
+    {
+		int32 adjustedIndex = LayerIndex - 1; // Same offset as AssignBlendLayer
+        Instance->SetScalarParameterValueEditorOnly(FMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::BlendParameter, adjustedIndex), Value);
+        RefreshEditorMaterialInstance(Instance);
+        return true;
+    }
+    return false;
+}
+
+FLinearColor ULayeredMaterialLibrary::GetLayeredMaterialBlendVectorParameterValue(UMaterialInstance* Instance, FName ParameterName, int32 LayerIndex)
+{
+    FLinearColor Result = FLinearColor(0, 0, 0, 0);
+    if (Instance)
+    {
+        int32 adjustedIndex = LayerIndex - 1;  // Same offset as AssignBlendLayer
+        Instance->GetVectorParameterValue(FHashedMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::BlendParameter, adjustedIndex), Result);
+    }
+    return Result;
+}
+
+bool ULayeredMaterialLibrary::SetLayeredMaterialBlendVectorParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, int32 LayerIndex, FLinearColor Value)
+{
+    if (Instance)
+    {
+        int32 adjustedIndex = LayerIndex - 1;  // Same offset as AssignBlendLayer
+        Instance->SetVectorParameterValueEditorOnly(FMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::BlendParameter, adjustedIndex), Value);
+        RefreshEditorMaterialInstance(Instance);
+        return true;
+    }
+    return false;
+}
+
+bool ULayeredMaterialLibrary::GetLayeredMaterialBlendStaticSwitchParameterValue(UMaterialInstance* Instance, FName ParameterName, int32 LayerIndex)
+{
+    bool bResult = false;
+    if (Instance)
+    {
+        FGuid OutGuid;
+		int32 adjustedIndex = LayerIndex - 1; // Same offset as AssignBlendLayer
+        Instance->GetStaticSwitchParameterValue(FHashedMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::BlendParameter, adjustedIndex), bResult, OutGuid);
+    }
+    return bResult;
+}
+
+bool ULayeredMaterialLibrary::SetLayeredMaterialBlendStaticSwitchParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, int32 LayerIndex, bool Value)
+{
+    if (Instance)
+    {
+		int32 adjustedIndex = LayerIndex - 1; // Same offset as AssignBlendLayer
+        Instance->SetStaticSwitchParameterValueEditorOnly(FMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::BlendParameter, adjustedIndex), Value);
+        RefreshEditorMaterialInstance(Instance);
+        return true;
+    }
+    return false;
+}
+
+UTexture* ULayeredMaterialLibrary::GetLayeredMaterialBlendTextureParameterValue(UMaterialInstance* Instance, FName ParameterName, int32 LayerIndex)
+{
+    UTexture* Result = nullptr;
+    if (Instance)
+    {
+		int32 adjustedIndex = LayerIndex - 1; // Same offset as AssignBlendLayer
+        Instance->GetTextureParameterValue(FHashedMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::BlendParameter, adjustedIndex), Result);
+    }
+    return Result;
+}
+
+bool ULayeredMaterialLibrary::SetLayeredMaterialBlendTextureParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, int32 LayerIndex, UTexture* Value)
+{
+    if (Instance)
+    {
+		int32 adjustedIndex = LayerIndex - 1; // Same offset as AssignBlendLayer
+        Instance->SetTextureParameterValueEditorOnly(FMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::BlendParameter, adjustedIndex), Value);
+        RefreshEditorMaterialInstance(Instance);
+        return true;
+    }
+    return false;
+}
+
+FVector4 ULayeredMaterialLibrary::GetLayeredMaterialBlendChannelMaskParameterValue(UMaterialInstance* Instance, FName ParameterName, int32 LayerIndex)
+{
+    FLinearColor Result = FLinearColor(0, 0, 0, 0);
+    if (Instance)
+    {
+        int32 adjustedIndex = LayerIndex - 1;
+        Instance->GetVectorParameterValue(FHashedMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::BlendParameter, adjustedIndex), Result);
+    }
+    return FVector4(Result.R, Result.G, Result.B, Result.A);
+}
+
+bool ULayeredMaterialLibrary::SetLayeredMaterialBlendChannelMaskParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, int32 LayerIndex, FVector4 Value)
+{
+    if (Instance)
+    {
+        int32 adjustedIndex = LayerIndex - 1;
+        FLinearColor Color(Value.X, Value.Y, Value.Z, Value.W);
+        Instance->SetVectorParameterValueEditorOnly(FMaterialParameterInfo(ParameterName, EMaterialParameterAssociation::BlendParameter, adjustedIndex), Color);
+        RefreshEditorMaterialInstance(Instance);
+        return true;
+    }
+    return false;
+}
+/*
+ The following functions are for Unlayered Parameters, but they don't exist by default.
+*/
+
+FVector4 ULayeredMaterialLibrary::GetMaterialChannelMaskParameterValue(UMaterialInstance* Instance, FName ParameterName, EMaterialParameterAssociation Association)
+{
+    FLinearColor Result = FLinearColor(0, 0, 0, 0);
+    if (Instance)
+    {
+        Instance->GetVectorParameterValue(FHashedMaterialParameterInfo(ParameterName, Association), Result);
+    }
+    return FVector4(Result.R, Result.G, Result.B, Result.A);
+}
+
+bool ULayeredMaterialLibrary::SetMaterialChannelMaskParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, FVector4 Value, EMaterialParameterAssociation Association)
+{
+    if (Instance)
+    {
+        FLinearColor Color(Value.X, Value.Y, Value.Z, Value.W);
+        Instance->SetVectorParameterValueEditorOnly(FMaterialParameterInfo(ParameterName, Association), Color);
+        RefreshEditorMaterialInstance(Instance);
+        return true;
+    }
+    return false;
 }
