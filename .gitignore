@@ -71,6 +71,16 @@ project_structure.txt
 *.VC.db
 *.VC.opendb
 
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+.cache/
+
 # Precompiled Assets
 SourceArt/**/*.png
 SourceArt/**/*.tga
