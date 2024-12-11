@@ -10,7 +10,7 @@ A Unreal Engine 5 plugin that provides functionality to edit material layer and 
 <!-- omit in toc -->
 ## Compatibility
 
-Builds/binaries are provided in the [releases](https://github.com/EJaworenko/UEAdvancedMaterialEditingLibrary/releases) page for UE5.0 to UE5.5.
+Builds/binaries are provided in the [releases](https://github.com/EJaworenko/UEAdvancedMaterialEditingLibrary/releases) page for UE5.1 to UE5.5.
 
 Note: All versions of this plugin use the same source files.
 
@@ -170,7 +170,7 @@ you should get the following result when you view the material at `/AdvancedMate
 
 ## Prerequisites
 
-- Unreal Engine 5.0 or later
+- Unreal Engine 5.1 or later
 
 ## License
 

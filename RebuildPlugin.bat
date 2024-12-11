@@ -17,8 +17,8 @@ if not defined UPLUGIN_FILE (
 )
 
 :: Hardcoded engine paths. They can be the same if the source code isn't dependant on a specific engine version.
-set "FROM_ENGINE=C:\Program Files\Epic Games\UE_5.0"
-set "TO_ENGINE=C:\Program Files\Epic Games\UE_5.0"
+set "FROM_ENGINE=C:\Program Files\Epic Games\UE_5.5"
+set "TO_ENGINE=C:\Program Files\Epic Games\UE_5.5"
 
 :: Create temp build directory with plugin name
 set "TEMP_BUILD_PATH=%USERPROFILE%\Desktop\PluginBuild\%PLUGIN_NAME%"
