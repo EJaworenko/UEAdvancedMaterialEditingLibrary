@@ -32,11 +32,9 @@ Note: All versions of this plugin use the same source files.
 <!-- omit in index.md -->
 📚 **[Documentation](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary)**
 
-View our comprehensive documentation including:
+View our (to be) comprehensive documentation including:
 
-- [Installation Guide](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary/installation) - Detailed setup instructions
 - [API Reference](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary/reference/core/exceptions) - Comprehensive documentation for Python API
-- [Troubleshooting Guide](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary/troubleshooting) - Common issues and solutions
 - [Git Guide for Beginners](https://ejaworenko.github.io/Node-Weaver/git-guide) - Version control basics explained simply (different project)
 
 <!-- omit in index.md -->

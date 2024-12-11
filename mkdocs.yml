@@ -92,10 +92,6 @@ plugins:
 
 nav:
   - Home: index.md
-  - Installation: guides/installation.md
-  - Usage:
-    - Python: guides/python-usage.md
-    - Blueprints: guides/blueprint-usage.md
   - API Reference:
     - Layered Material Library: api/layered_material_library.md
 
