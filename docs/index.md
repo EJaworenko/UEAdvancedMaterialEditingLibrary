@@ -20,10 +20,10 @@ Note: All versions of this plugin use the same source files.
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Blueprints Library](#blueprints-library)
+  - [Blueprint Example](#blueprint-example)
   - [Python Library](#python-library)
-  - [Blueprints](#blueprints)
-  - [Example Usage:](#example-usage)
-- [Simple(ish) Python Example](#simpleish-python-example)
+  - [Simple(ish) Python Example](#simpleish-python-example)
 - [Prerequisites](#prerequisites)
 - [License](#license)
 - [Contributing](#contributing)
@@ -62,20 +62,13 @@ Or use the included `RebuildPlugin.bat` to auto-build the plugin for a new versi
 
 ## Usage
 
-### Python Library
-
-The plugin provides a convenient `LayeredMaterialLibrary` class with static methods for material manipulation. When
-the plugin is added to your project, you can access it via:
-
-`from layered_material_library import LayeredMaterialLibrary`
-
-### Blueprints
+### Blueprints Library
 
 The plugin provides the following Blueprint nodes for Editor Utility Widgets:
 
 ![Blueprint Nodes](images/blueprint_nodes.png)
 
-### Example Usage:
+### Blueprint Example
 
 This example would check if a material is layered, if it is, add a new material layer, get the count, and assign
 a specific material layer asset to it.
@@ -85,7 +78,14 @@ not in-game.
 
 ![Blueprint Example](images/blueprint_example.png)
 
-## Simple(ish) Python Example
+### Python Library
+
+The plugin provides a convenient `LayeredMaterialLibrary` class with static methods for material manipulation. When
+the plugin is added to your project, you can access it via:
+
+`from layered_material_library import LayeredMaterialLibrary`
+
+### Simple(ish) Python Example
 
 The following example shows a way to approach using the python library that comes with the plugin.
 While it only shows the process of getting and setting values on a Material Layer, it works almost
