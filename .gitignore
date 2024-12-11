@@ -23,9 +23,6 @@
 ehthumbs.db
 Thumbs.db
 
-# Keep Builds directory
-!Builds/**/
-
 # Temp files
 *.tmp
 *.bak
@@ -105,3 +102,6 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Source Files
+_sourceFiles/

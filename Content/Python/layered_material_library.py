@@ -2,9 +2,24 @@ import unreal
 from typing import Optional, Union
 
 class LayeredMaterialLibrary:
-    """
-    Python wrapper for the AdvancedMaterialEditingLibrary plugin functionality.
-    Provides methods for manipulating layered materials and their parameters.
+    """Python wrapper for the AdvancedMaterialEditingLibrary plugin functionality.
+
+    This class provides methods for manipulating layered materials and their parameters in Unreal Engine.
+    It wraps the native C++ functionality exposed through the AdvancedMaterialEditingLibrary plugin.
+
+    Attributes:
+        CHANNEL_RED (unreal.LinearColor): Linear color representing the red channel mask (1,0,0,0).
+        CHANNEL_GREEN (unreal.LinearColor): Linear color representing the green channel mask (0,1,0,0).
+        CHANNEL_BLUE (unreal.LinearColor): Linear color representing the blue channel mask (0,0,1,0).
+        CHANNEL_ALPHA (unreal.LinearColor): Linear color representing the alpha channel mask (0,0,0,1).
+        CHANNELS (list[unreal.LinearColor]): List containing all channel mask constants.
+
+    Example:
+        >>> instance = unreal.load_object(None, '/Game/Materials/MyLayeredMaterial')
+        >>> lib = LayeredMaterialLibrary()
+        >>> if lib.is_layered_material(instance):
+        ...     layer_count = lib.get_layer_count(instance)
+        ...     print(f"Material has {layer_count} layers")
     """
 
     # Channel mask constants
@@ -16,8 +31,7 @@ class LayeredMaterialLibrary:
 
     @staticmethod
     def get_layer_count(instance: 'unreal.MaterialInstance') -> int:
-        """
-        Get the number of layers in a material instance.
+        """Get the number of layers in a material instance.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to check
@@ -29,8 +43,7 @@ class LayeredMaterialLibrary:
 
     @staticmethod
     def add_material_layer(instance: 'unreal.MaterialInstance') -> bool:
-        """
-        Add a new material layer and corresponding blend layer to the material instance.
+        """Add a new material layer and corresponding blend layer to the material instance.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to modify
@@ -42,8 +55,7 @@ class LayeredMaterialLibrary:
 
     @staticmethod
     def is_layered_material(instance: 'unreal.MaterialInstance') -> bool:
-        """
-        Check if a material instance is a layered material.
+        """Check if a material instance is a layered material.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to check
@@ -59,8 +71,7 @@ class LayeredMaterialLibrary:
         layer_index: int,
         new_layer_function: 'unreal.MaterialFunctionInterface'
     ) -> bool:
-        """
-        Assign a material function to a specific layer.
+        """Assign a material function to a specific layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to modify
@@ -78,8 +89,7 @@ class LayeredMaterialLibrary:
         layer_index: int,
         new_blend_layer_function: 'unreal.MaterialFunctionInterface'
     ) -> bool:
-        """
-        Assign a blend function to a specific layer.
+        """Assign a blend function to a specific layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to modify
@@ -97,8 +107,7 @@ class LayeredMaterialLibrary:
         parameter_name: str,
         layer_index: int
     ) -> float:
-        """
-        Get the value of a scalar parameter from a specific layer.
+        """Get the value of a scalar parameter from a specific layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to query
@@ -117,8 +126,7 @@ class LayeredMaterialLibrary:
         layer_index: int,
         value: float
     ) -> bool:
-        """
-        Set the value of a scalar parameter in a specific layer.
+        """Set the value of a scalar parameter in a specific layer.
 
         Args:
             instance (unreal.MaterialInstanceConstant): The material instance to modify
@@ -134,8 +142,7 @@ class LayeredMaterialLibrary:
     @staticmethod
     def get_layered_material_vector_parameter_value(instance: 'unreal.MaterialInstance',
                                                     parameter_name: str, layer_index: int) -> 'unreal.LinearColor':
-        """
-        Get the value of a vector parameter from a specific layer.
+        """Get the value of a vector parameter from a specific layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to query
@@ -151,8 +158,7 @@ class LayeredMaterialLibrary:
     def set_layered_material_vector_parameter_value(instance: 'unreal.MaterialInstanceConstant',
                                                     parameter_name: str, layer_index: int,
                                                     value: 'unreal.LinearColor') -> bool:
-        """
-        Set the value of a vector parameter in a specific layer.
+        """Set the value of a vector parameter in a specific layer.
 
         Args:
             instance (unreal.MaterialInstanceConstant): The material instance to modify
@@ -171,8 +177,7 @@ class LayeredMaterialLibrary:
         parameter_name: str,
         layer_index: int
     ) -> bool:
-        """
-        Get the value of a static switch parameter from a specific layer.
+        """Get the value of a static switch parameter from a specific layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to query
@@ -191,8 +196,7 @@ class LayeredMaterialLibrary:
         layer_index: int,
         value: bool
     ) -> bool:
-        """
-        Set the value of a static switch parameter in a specific layer.
+        """Set the value of a static switch parameter in a specific layer.
 
         Args:
             instance (unreal.MaterialInstanceConstant): The material instance to modify
@@ -211,8 +215,7 @@ class LayeredMaterialLibrary:
         parameter_name: str,
         layer_index: int
     ) -> Optional['unreal.Texture']:
-        """
-        Get the value of a texture parameter from a specific layer.
+        """Get the value of a texture parameter from a specific layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to query
@@ -231,8 +234,7 @@ class LayeredMaterialLibrary:
         layer_index: int,
         value: 'unreal.Texture'
     ) -> bool:
-        """
-        Set the value of a texture parameter in a specific layer.
+        """Set the value of a texture parameter in a specific layer.
 
         Args:
             instance (unreal.MaterialInstanceConstant): The material instance to modify
@@ -249,8 +251,7 @@ class LayeredMaterialLibrary:
     def get_layered_material_channel_mask_parameter_value(instance: 'unreal.MaterialInstance',
                                                         parameter_name: str,
                                                         layer_index: int) -> 'unreal.LinearColor':
-        """
-        Get the value of a channel mask parameter from a specific layer.
+        """Get the value of a channel mask parameter from a specific layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to query
@@ -267,8 +268,7 @@ class LayeredMaterialLibrary:
                                                         parameter_name: str,
                                                         layer_index: int,
                                                         value: 'unreal.LinearColor') -> bool:
-        """
-        Set the value of a channel mask parameter in a specific layer.
+        """Set the value of a channel mask parameter in a specific layer.
 
         Args:
             instance (unreal.MaterialInstanceConstant): The material instance to modify
@@ -286,8 +286,7 @@ class LayeredMaterialLibrary:
     @staticmethod
     def get_layered_material_blend_scalar_parameter_value(instance: 'unreal.MaterialInstance',
                                                         parameter_name: str, layer_index: int) -> float:
-        """
-        Get the value of a scalar parameter from a specific blend layer.
+        """Get the value of a scalar parameter from a specific blend layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to query
@@ -302,8 +301,7 @@ class LayeredMaterialLibrary:
     @staticmethod
     def set_layered_material_blend_scalar_parameter_value(instance: 'unreal.MaterialInstanceConstant',
                                                         parameter_name: str, layer_index: int, value: float) -> bool:
-        """
-        Set the value of a scalar parameter in a specific blend layer.
+        """Set the value of a scalar parameter in a specific blend layer.
 
         Args:
             instance (unreal.MaterialInstanceConstant): The material instance to modify
@@ -319,8 +317,7 @@ class LayeredMaterialLibrary:
     @staticmethod
     def get_layered_material_blend_vector_parameter_value(instance: 'unreal.MaterialInstance',
                                                         parameter_name: str, layer_index: int) -> 'unreal.LinearColor':
-        """
-        Get the value of a vector parameter from a specific blend layer.
+        """Get the value of a vector parameter from a specific blend layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to query
@@ -336,8 +333,7 @@ class LayeredMaterialLibrary:
     def set_layered_material_blend_vector_parameter_value(instance: 'unreal.MaterialInstanceConstant',
                                                         parameter_name: str, layer_index: int,
                                                         value: 'unreal.LinearColor') -> bool:
-        """
-        Set the value of a vector parameter in a specific blend layer.
+        """Set the value of a vector parameter in a specific blend layer.
 
         Args:
             instance (unreal.MaterialInstanceConstant): The material instance to modify
@@ -353,8 +349,7 @@ class LayeredMaterialLibrary:
     @staticmethod
     def get_layered_material_blend_static_switch_parameter_value(instance: 'unreal.MaterialInstance',
                                                                 parameter_name: str, layer_index: int) -> bool:
-        """
-        Get the value of a static switch parameter from a specific blend layer.
+        """Get the value of a static switch parameter from a specific blend layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to query
@@ -369,8 +364,7 @@ class LayeredMaterialLibrary:
     @staticmethod
     def set_layered_material_blend_static_switch_parameter_value(instance: 'unreal.MaterialInstanceConstant',
                                                                 parameter_name: str, layer_index: int, value: bool) -> bool:
-        """
-        Set the value of a static switch parameter in a specific blend layer.
+        """Set the value of a static switch parameter in a specific blend layer.
 
         Args:
             instance (unreal.MaterialInstanceConstant): The material instance to modify
@@ -386,8 +380,7 @@ class LayeredMaterialLibrary:
     @staticmethod
     def get_layered_material_blend_texture_parameter_value(instance: 'unreal.MaterialInstance',
                                                         parameter_name: str, layer_index: int) -> Optional['unreal.Texture']:
-        """
-        Get the value of a texture parameter from a specific blend layer.
+        """Get the value of a texture parameter from a specific blend layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to query
@@ -403,8 +396,7 @@ class LayeredMaterialLibrary:
     def set_layered_material_blend_texture_parameter_value(instance: 'unreal.MaterialInstanceConstant',
                                                         parameter_name: str, layer_index: int,
                                                         value: 'unreal.Texture') -> bool:
-        """
-        Set the value of a texture parameter in a specific blend layer.
+        """Set the value of a texture parameter in a specific blend layer.
 
         Args:
             instance (unreal.MaterialInstanceConstant): The material instance to modify
@@ -421,8 +413,7 @@ class LayeredMaterialLibrary:
     def get_layered_material_blend_channel_mask_parameter_value(instance: 'unreal.MaterialInstance',
                                                             parameter_name: str,
                                                             layer_index: int) -> 'unreal.LinearColor':
-        """
-        Get the value of a channel mask parameter from a specific blend layer.
+        """Get the value of a channel mask parameter from a specific blend layer.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to query
@@ -439,8 +430,7 @@ class LayeredMaterialLibrary:
                                                             parameter_name: str,
                                                             layer_index: int,
                                                             value: 'unreal.LinearColor') -> bool:
-        """
-        Set the value of a channel mask parameter in a specific blend layer.
+        """Set the value of a channel mask parameter in a specific blend layer.
 
         Args:
             instance (unreal.MaterialInstanceConstant): The material instance to modify
@@ -456,13 +446,13 @@ class LayeredMaterialLibrary:
     # Unlayered Parameters
 
     @staticmethod
-    def get_material_channel_mask_parameter_value(
+    def get_material_instance_channel_mask_parameter_value(
         instance: 'unreal.MaterialInstance',
         parameter_name: str,
         association: 'unreal.MaterialParameterAssociation' = unreal.MaterialParameterAssociation.GLOBAL_PARAMETER
     ) -> 'unreal.LinearColor':
-        """
-        Get the value of a channel mask parameter from a material.
+        """Get the value of a channel mask parameter from a material. Not for material
+        layers, just extends original material functionality that was missing.
 
         Args:
             instance (unreal.MaterialInstance): The material instance to query
@@ -473,21 +463,21 @@ class LayeredMaterialLibrary:
         Returns:
             unreal.LinearColor: The parameter value. Returns (0,0,0,0) if parameter not found or instance is invalid
         """
-        return unreal.LayeredMaterialLibrary.get_material_channel_mask_parameter_value(
+        return unreal.LayeredMaterialLibrary.get_material_instance_channel_mask_parameter_value(
             instance,
             parameter_name,
             association
         )
 
     @staticmethod
-    def set_material_channel_mask_parameter_value(
+    def set_material_instance_channel_mask_parameter_value(
         instance: 'unreal.MaterialInstanceConstant',
         parameter_name: str,
         value: 'unreal.LinearColor',
         association: 'unreal.MaterialParameterAssociation' = unreal.MaterialParameterAssociation.GLOBAL_PARAMETER
     ) -> bool:
-        """
-        Set the value of a channel mask parameter in a material.
+        """Set the value of a channel mask parameter in a material. Not for material
+        layers, just extends original material functionality that was missing.
 
         Args:
             instance (unreal.MaterialInstanceConstant): The material instance to modify
@@ -499,7 +489,7 @@ class LayeredMaterialLibrary:
         Returns:
             bool: True if the parameter was successfully set, False otherwise
         """
-        return unreal.LayeredMaterialLibrary.set_material_channel_mask_parameter_value(
+        return unreal.LayeredMaterialLibrary.set_material_instance_channel_mask_parameter_value(
             instance,
             parameter_name,
             value,
@@ -516,8 +506,7 @@ class LayeredMaterialLibrary:
         parameter_type: str = 'scalar',
         parameter_domain: str = 'layer'
     ) -> Union[float, 'unreal.LinearColor', bool, 'unreal.Texture']:
-        """
-        Get any material parameter value based on type and domain.
+        """Get any material parameter value based on type and domain.
 
         Args:
             instance: The material instance to query
@@ -573,8 +562,7 @@ class LayeredMaterialLibrary:
         parameter_domain: str = 'layer',
         only_if_different: bool = False
     ) -> bool:
-        """
-        Set any material parameter value based on type and domain.
+        """Set any material parameter value based on type and domain.
 
         Args:
             instance: The material instance to modify
@@ -655,8 +643,7 @@ class LayeredMaterialLibrary:
         parameter_name: str,
         parameter_type: str = 'scalar'
     ) -> Optional[str]:
-        """
-        Get the source asset path where a parameter was defined.
+        """Get the source asset path where a parameter was defined.
 
         Args:
             instance: Material instance to query
@@ -680,12 +667,12 @@ class LayeredMaterialLibrary:
 
     @staticmethod
     def get_full_material_as_dict(instance: 'unreal.MaterialInstance') -> dict:
-        """
-        Get a comprehensive dictionary of material information including global parameters,
-        layer assets, blend assets, and their respective parameters.
+        """Get a comprehensive dictionary of material information.
+
+        This includes global parameters, layer assets, blend assets, and their respective parameters.
 
         Args:
-            instance: The material instance to query
+            instance (unreal.MaterialInstance): The material instance to query.
 
         Returns:
             dict: A dictionary containing all material information structured as:
@@ -782,8 +769,7 @@ class LayeredMaterialLibrary:
         instance: 'unreal.MaterialInstanceConstant',
         material_data: dict
     ) -> bool:
-        """
-        Create or modify a layered material using a comprehensive dictionary of parameters.
+        """Create or modify a layered material using a comprehensive dictionary of parameters.
 
         Args:
             instance: Material instance to modify
@@ -854,31 +840,76 @@ class LayeredMaterialLibrary:
 
 
 
-"""
+'''
 # Example usage
 if __name__ == "__main__":
-    instance = unreal.load_object(None, '/Game/AP_MaterialLibrary/CommonMaterial/CommonLayer/testPython')
-    new_layer_function = unreal.load_object(None, '/Game/AP_MaterialLibrary/LayerMaterial/ML_Master/ML_PLANAR_LAYER')
-    new_blend_layer_function = unreal.load_object(None, '/Game/AP_MaterialLibrary/LayerMaterial/ML_Blend/MLB_PlanarAngleHeightVertexRadialMaskAutoAxe')
-    parameter_name = 'Metallic'
-    layer_index = 0
-    value = .5
+    from layered_material_library import LayeredMaterialLibrary
+    import unreal
 
-    #LayeredMaterialLibrary.refresh_editor_material_instance(instance)
-    print(instance)
-    print(LayeredMaterialLibrary.get_layer_count(instance))
-    LayeredMaterialLibrary.add_material_layer(instance)
-    print(LayeredMaterialLibrary.is_layered_material(instance))
-    LayeredMaterialLibrary.assign_layer_material(instance, layer_index, new_layer_function)
-    layer_index = 1
-    LayeredMaterialLibrary.assign_layer_material(instance, layer_index, new_layer_function)
-    LayeredMaterialLibrary.assign_blend_layer(instance, layer_index, new_blend_layer_function)
-    print(LayeredMaterialLibrary.get_layered_material_scalar_parameter_value(instance, parameter_name, layer_index))
-    LayeredMaterialLibrary.set_layered_material_scalar_parameter_value(instance, parameter_name, layer_index, value)
-    parameter_name = 'Normal Map ?'
-    print(LayeredMaterialLibrary.get_layered_material_static_switch_parameter_value(instance, parameter_name, layer_index))
-    LayeredMaterialLibrary.set_layered_material_static_switch_parameter_value(instance, parameter_name, layer_index, True)
-    parameter_name = 'Normal_Map'
-    print(LayeredMaterialLibrary.get_layered_material_texture_parameter_value(instance, parameter_name, layer_index))
-    #LayeredMaterialLibrary.set_layered_material_texture_parameter_value(instance, parameter_name, layer_index, unreal.load_object(None, '/Game/Path/To/Your/Texture'))
-"""
+    # Load required assets
+    material_instance = unreal.load_object(None, '/AdvancedMaterialEditingLibrary/Examples/MI_TargetMaterial')
+    simple_layer = unreal.load_object(None, '/AdvancedMaterialEditingLibrary/Examples/ML_MaterialLayer')
+    red_layer = unreal.load_object(None, '/AdvancedMaterialEditingLibrary/Examples/ML_MaterialLayer_Red')
+    blend_function = unreal.load_object(None, '/AdvancedMaterialEditingLibrary/Examples/MLB_MaterialLayerBlend')
+
+    # Check material properties
+    print(f"Material instance is layered material: {LayeredMaterialLibrary.is_layered_material(material_instance)}")
+    print(f"Initial layer count: {LayeredMaterialLibrary.get_layer_count(material_instance)}")
+
+    # Add and configure layers
+    LayeredMaterialLibrary.assign_layer_material(material_instance, 0, red_layer) # Set base layer to a new material
+
+    LayeredMaterialLibrary.add_material_layer(material_instance)  # Add second layer
+    LayeredMaterialLibrary.assign_layer_material(material_instance, 1, simple_layer)
+    LayeredMaterialLibrary.assign_blend_layer(material_instance, 1, blend_function)
+
+    LayeredMaterialLibrary.add_material_layer(material_instance)  # Add third layer
+    LayeredMaterialLibrary.assign_layer_material(material_instance, 2, simple_layer)
+    LayeredMaterialLibrary.assign_blend_layer(material_instance, 2, blend_function)
+
+    # Modify layer parameters
+    # For all parameter names, they just need to match whatever label you set for them when you created
+    # the master material/material layer/material layer blend.
+    def modify_layer_parameters(layer_index: int, metallic: float = 0):
+        """Example of a function that could modify parameters of different kinds.
+
+        When a parameter is set, the checkbox to enable editing it is enabled, even if the value was not
+        changed. I do a test below with the scalar value before setting to avoid enabling the parameter
+        if it isn't necessary.
+
+        Args:
+            layer_index: The layer index to search for the parameter on
+            metallic: Example argument for a value you could set on a scalar value.
+
+        """
+        # Scalar parameter example
+        metallic_value = LayeredMaterialLibrary.get_layered_material_scalar_parameter_value(
+            material_instance, 'Metallic', layer_index
+        )
+        if metallic_value != metallic:
+            LayeredMaterialLibrary.set_layered_material_scalar_parameter_value(
+                material_instance, 'Metallic', layer_index, metallic
+            )
+
+        # Static switch example
+        LayeredMaterialLibrary.set_layered_material_static_switch_parameter_value(
+            material_instance, 'Use Normal Map', layer_index, True
+        )
+
+        # Texture parameter example - Requires StarterContent
+        texture = unreal.load_object(None, '/Game/StarterContent/Textures/T_CobbleStone_Rough_N')
+        LayeredMaterialLibrary.set_layered_material_texture_parameter_value(
+            material_instance, 'Normal Map', layer_index, texture
+        )
+
+    # Modify parameters for the layers
+    modify_layer_parameters(layer_index=1, metallic=0)
+    modify_layer_parameters(layer_index=2, metallic=1)
+
+    # Verify changes
+    print(f"Final layer count: {LayeredMaterialLibrary.get_layer_count(material_instance)}")
+    print(f"Layer 1 Metallic value: {LayeredMaterialLibrary.get_layered_material_scalar_parameter_value(material_instance, 'Metallic', 1)}")
+    print(f"Layer 1 Normal Map enabled: {LayeredMaterialLibrary.get_layered_material_static_switch_parameter_value(material_instance, 'Use Normal Map', 1)}")
+    print(f"Layer 2 Metallic value: {LayeredMaterialLibrary.get_layered_material_scalar_parameter_value(material_instance, 'Metallic', 2)}")
+    print(f"Layer 2 Normal Map enabled: {LayeredMaterialLibrary.get_layered_material_static_switch_parameter_value(material_instance, 'Use Normal Map', 2)}")
+'''

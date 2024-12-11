@@ -10,34 +10,40 @@ A Unreal Engine 5 plugin that provides functionality to edit material layer and 
 <!-- omit in toc -->
 ## Compatibility
 
-Builds are provided in the [releases](https://github.com/EJaworenko/UEAdvancedMaterialEditingLibrary/releases) page for UE5.0 to UE5.5.
+Builds/binaries are provided in the [releases](https://github.com/EJaworenko/UEAdvancedMaterialEditingLibrary/releases) page for UE5.0 to UE5.5.
+
+Note: All versions of this plugin use the same source files.
 
 <!-- omit in toc -->
 ## Table of Contents
 - [Documentation](#documentation)
-- [For Contributors](#for-contributors)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Python Library](#python-library)
   - [Blueprint Usage](#blueprint-usage)
-- [Quick Start Python Example](#quick-start-python-example)
+- [Simple(ish) Python Example](#simpleish-python-example)
 - [Prerequisites](#prerequisites)
 - [License](#license)
 - [Contributing](#contributing)
 - [Getting Help](#getting-help)
 
 ## Documentation
+<!-- omit in index.md -->
 📚 **[Documentation](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary)**
+
 View our comprehensive documentation including:
+
 - [Installation Guide](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary/installation) - Detailed setup instructions
-- [Feature Documentation](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary/features) - In-depth guides for each tool
 - [API Reference](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary/reference/core/exceptions) - Comprehensive documentation for Python API
 - [Troubleshooting Guide](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary/troubleshooting) - Common issues and solutions
-- [Git Guide for Beginners](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary/git-guide) - Version control basics explained simply
+- [Git Guide for Beginners](https://ejaworenko.github.io/Node-Weaver/git-guide) - Version control basics explained simply (different project)
 
+<!-- omit in index.md -->
+<!-- omit in toc -->
 ## For Contributors
-💻 [Source Documentation](Docs) - Documentation source files for development (can find locally)
+<!-- omit in index.md -->
+💻 [Source Documentation](docs) - Documentation source files for development (can find locally)
 
 ## Features
 
@@ -66,11 +72,14 @@ Or use the included `RebuildPlugin.bat` to auto-build the plugin for a new versi
 
 ### Python Library
 
-The plugin provides a convenient `LayeredMaterialLibrary` class with static methods for material manipulation.
+The plugin provides a convenient `LayeredMaterialLibrary` class with static methods for material manipulation. When
+the plugin is added to your project, you can access it via:
+
+`from layered_material_library import LayeredMaterialLibrary`
 
 ### Blueprint Usage
 
-The plugin provides the following Blueprint nodes:
+The plugin provides the following Blueprint nodes for Editor Utility Widgets:
 
 ![Blueprint Nodes](docs/images/blueprint_nodes.png)
 
@@ -84,57 +93,87 @@ IsLayeredMaterial -> Branch
 -> AssignLayerMaterial
 ```
 
-## Quick Start Python Example
+## Simple(ish) Python Example
+
+The following example shows a way to approach using the python library that comes with the plugin.
+While it only shows the process of getting and setting values on a Material Layer, it works almost
+the exact same way for Material Layer Blend assets.
 
 ```python
 from layered_material_library import LayeredMaterialLibrary
 import unreal
 
 # Load required assets
-material_instance = unreal.load_object(None, '/Game/AP_MaterialLibrary/CommonMaterial/CommonLayer/testPython')
-planar_layer = unreal.load_object(None, '/Game/AP_MaterialLibrary/LayerMaterial/ML_Master/ML_PLANAR_LAYER')
-blend_function = unreal.load_object(None, '/Game/AP_MaterialLibrary/LayerMaterial/ML_Blend/MLB_PlanarAngleHeightVertexRadialMaskAutoAxe')
+material_instance = unreal.load_object(None, '/AdvancedMaterialEditingLibrary/Examples/MI_TargetMaterial')
+simple_layer = unreal.load_object(None, '/AdvancedMaterialEditingLibrary/Examples/ML_MaterialLayer')
+red_layer = unreal.load_object(None, '/AdvancedMaterialEditingLibrary/Examples/ML_MaterialLayer_Red')
+blend_function = unreal.load_object(None, '/AdvancedMaterialEditingLibrary/Examples/MLB_MaterialLayerBlend')
 
 # Check material properties
-print(f"Is layered material: {LayeredMaterialLibrary.is_layered_material(material_instance)}")
+print(f"Material instance is layered material: {LayeredMaterialLibrary.is_layered_material(material_instance)}")
 print(f"Initial layer count: {LayeredMaterialLibrary.get_layer_count(material_instance)}")
 
 # Add and configure layers
-LayeredMaterialLibrary.add_material_layer(material_instance)  # Add base layer
-LayeredMaterialLibrary.assign_layer_material(material_instance, 0, planar_layer)
+LayeredMaterialLibrary.assign_layer_material(material_instance, 0, red_layer) # Set base layer to a new material
 
 LayeredMaterialLibrary.add_material_layer(material_instance)  # Add second layer
-LayeredMaterialLibrary.assign_layer_material(material_instance, 1, planar_layer)
+LayeredMaterialLibrary.assign_layer_material(material_instance, 1, simple_layer)
 LayeredMaterialLibrary.assign_blend_layer(material_instance, 1, blend_function)
 
+LayeredMaterialLibrary.add_material_layer(material_instance)  # Add third layer
+LayeredMaterialLibrary.assign_layer_material(material_instance, 2, simple_layer)
+LayeredMaterialLibrary.assign_blend_layer(material_instance, 2, blend_function)
+
 # Modify layer parameters
-def modify_layer_parameters(layer_index: int):
+# For all parameter names, they just need to match whatever label you set for them when you created
+# the master material/material layer/material layer blend.
+def modify_layer_parameters(layer_index: int, metallic: float = 0):
+    """Example of a function that could modify parameters of different kinds.
+
+    When a parameter is set, the checkbox to enable editing it is enabled, even if the value was not
+    changed. I do a test below with the scalar value before setting to avoid enabling the parameter
+    if it isn't necessary.
+
+    Args:
+        layer_index: The layer index to search for the parameter on
+        metallic: Example argument for a value you could set on a scalar value.
+
+    """
     # Scalar parameter example
-    LayeredMaterialLibrary.set_layered_material_scalar_parameter_value(
-        material_instance, 'Metallic', layer_index, 0.5
+    metallic_value = LayeredMaterialLibrary.get_layered_material_scalar_parameter_value(
+        material_instance, 'Metallic', layer_index
     )
+    if metallic_value != metallic:
+        LayeredMaterialLibrary.set_layered_material_scalar_parameter_value(
+            material_instance, 'Metallic', layer_index, metallic
+        )
 
     # Static switch example
     LayeredMaterialLibrary.set_layered_material_static_switch_parameter_value(
-        material_instance, 'Normal Map ?', layer_index, True
+        material_instance, 'Use Normal Map', layer_index, True
     )
 
-    # Texture parameter example (commented out - replace with valid texture path)
-    """
-    texture = unreal.load_object(None, '/Game/Path/To/Your/Texture')
+    # Texture parameter example - Requires StarterContent
+    texture = unreal.load_object(None, '/Game/StarterContent/Textures/T_CobbleStone_Rough_N')
     LayeredMaterialLibrary.set_layered_material_texture_parameter_value(
-        material_instance, 'Normal_Map', layer_index, texture
+        material_instance, 'Normal Map', layer_index, texture
     )
-    """
 
-# Modify parameters for top layer
-modify_layer_parameters(1)
+# Modify parameters for the layers
+modify_layer_parameters(layer_index=1, metallic=0)
+modify_layer_parameters(layer_index=2, metallic=1)
 
 # Verify changes
 print(f"Final layer count: {LayeredMaterialLibrary.get_layer_count(material_instance)}")
 print(f"Layer 1 Metallic value: {LayeredMaterialLibrary.get_layered_material_scalar_parameter_value(material_instance, 'Metallic', 1)}")
-print(f"Layer 1 Normal Map enabled: {LayeredMaterialLibrary.get_layered_material_static_switch_parameter_value(material_instance, 'Normal Map ?', 1)}")
+print(f"Layer 1 Normal Map enabled: {LayeredMaterialLibrary.get_layered_material_static_switch_parameter_value(material_instance, 'Use Normal Map', 1)}")
+print(f"Layer 2 Metallic value: {LayeredMaterialLibrary.get_layered_material_scalar_parameter_value(material_instance, 'Metallic', 2)}")
+print(f"Layer 2 Normal Map enabled: {LayeredMaterialLibrary.get_layered_material_static_switch_parameter_value(material_instance, 'Use Normal Map', 2)}")
 ```
+
+If you copy-paste the above into an Unreal Engine terminal (Output Log set to Python is my preference)
+you should get the following result when you view the material at `/AdvancedMaterialEditingLibrary/Examples/MI_TargetMaterial`
+![Python Example Results](docs/images/python_example_result.png)
 
 ## Prerequisites
 
@@ -147,6 +186,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contributing
 
 The project is small, I'm not sure it can expand much but feel free to contribute! If you're new to open source check out:
+
 1. My [Git Guide](https://ejaworenko.github.io/Node-Weaver/git-guide) for version control basics
 2. GitHub's guide on [Creating a Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
 3. The [issues page](https://github.com/EJaworenko/UEAdvancedMaterialEditingLibrary/issues) for beginner-friendly tasks

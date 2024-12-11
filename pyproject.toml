@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ue-advanced-material-editing-library"
+version = "1.0.0"
+description = "Unreal Engine plugin for advanced material layer editing"
+requires-python = ">=3.7"
+readme = "README.md"
+authors = [
+    {name = "Edward Jaworenko", email = "edward@jaworenko.design"}
+]
+
+[project.optional-dependencies]
+docs = [
+    "mkdocs>=1.4.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocstrings[python]>=0.20.0",
+    "mkdocs-gen-files>=0.5.0",
+    "mkdocs-literate-nav>=0.6.0",
+    "mkdocs-section-index>=0.3.0",
+    "mkdocs-git-revision-date-localized-plugin>=1.2.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["mkdocs_transform_gh_readme"]
+
+[project.entry-points."mkdocs.plugins"]
+mkdocs_transform_gh_readme = "mkdocs_transform_gh_readme:ReadmeTransformPlugin"

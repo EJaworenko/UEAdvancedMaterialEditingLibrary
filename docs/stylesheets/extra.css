@@ -1,0 +1,29 @@
+:root {
+    --md-primary-fg-color: #01859c;
+    --md-accent-fg-color: #A92A43;
+  }
+
+  /* Adjust icon logo size */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 40px;  /* Adjust height as needed */
+  width: auto;   /* Maintains aspect ratio */
+}
+
+/* Light mode */
+[data-md-color-scheme="default"] .md-header {
+  background-image: linear-gradient(90deg, rgb(14, 111, 130) 0%, rgb(24, 178, 178) 100%);
+}
+
+[data-md-color-scheme="default"] .md-tabs {
+  background-image: linear-gradient(90deg, rgb(14, 111, 130) 0%, rgb(24, 178, 178) 100%);
+}
+
+/* Dark mode */
+[data-md-color-scheme="slate"] .md-header {
+  background-image: linear-gradient(90deg, rgb(169, 42, 67) 0%, rgb(247, 70, 105) 100%);
+}
+
+[data-md-color-scheme="slate"] .md-tabs {
+  background-image: linear-gradient(90deg, rgb(169, 42, 67) 0%, rgb(247, 70, 105) 100%);
+}

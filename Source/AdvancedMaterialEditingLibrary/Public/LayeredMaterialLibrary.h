@@ -28,6 +28,7 @@ class ADVANCEDMATERIALEDITINGLIBRARY_API ULayeredMaterialLibrary : public UBluep
 		static bool AssignBlendLayer(UMaterialInstance* Instance, int32 LayerIndex, UMaterialFunctionInterface* NewBlendLayerFunction);
 
 	// Parameter value getters and setters for material layers
+
 	UFUNCTION(BlueprintCallable, Category = "AdvancedMaterialEditingLibrary")
 		static float GetLayeredMaterialScalarParameterValue(UMaterialInstance* Instance, FName ParameterName, int32 LayerIndex);
 	UFUNCTION(BlueprintCallable, Category = "AdvancedMaterialEditingLibrary")
@@ -54,6 +55,7 @@ class ADVANCEDMATERIALEDITINGLIBRARY_API ULayeredMaterialLibrary : public UBluep
 		static bool SetLayeredMaterialChannelMaskParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, int32 LayerIndex, FVector4 Value);
 
 	// Parameter value getters and setters for blend layers
+
 	UFUNCTION(BlueprintCallable, Category = "AdvancedMaterialEditingLibrary")
 		static float GetLayeredMaterialBlendScalarParameterValue(UMaterialInstance* Instance, FName ParameterName, int32 LayerIndex);
 	UFUNCTION(BlueprintCallable, Category = "AdvancedMaterialEditingLibrary")
@@ -81,7 +83,8 @@ class ADVANCEDMATERIALEDITINGLIBRARY_API ULayeredMaterialLibrary : public UBluep
 
 	// For non-layered materials
 	UFUNCTION(BlueprintCallable, Category = "AdvancedMaterialEditingLibrary")
-		static FVector4 GetMaterialChannelMaskParameterValue(UMaterialInstance* Instance, FName ParameterName, EMaterialParameterAssociation Association = EMaterialParameterAssociation::GlobalParameter);
+		static FVector4 GetMaterialInstanceChannelMaskParameterValue(UMaterialInstance* Instance, FName ParameterName, EMaterialParameterAssociation Association = EMaterialParameterAssociation::GlobalParameter);
+	// For non-layered materials
 	UFUNCTION(BlueprintCallable, Category = "AdvancedMaterialEditingLibrary")
-		static bool SetMaterialChannelMaskParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, FVector4 Value, EMaterialParameterAssociation Association = EMaterialParameterAssociation::GlobalParameter);
+		static bool SetMaterialInstanceChannelMaskParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, FVector4 Value, EMaterialParameterAssociation Association = EMaterialParameterAssociation::GlobalParameter);
 };

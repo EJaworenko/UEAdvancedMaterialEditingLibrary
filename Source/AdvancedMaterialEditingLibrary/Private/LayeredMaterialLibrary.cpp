@@ -316,7 +316,7 @@ bool ULayeredMaterialLibrary::SetLayeredMaterialBlendChannelMaskParameterValue(U
  The following functions are for Unlayered Parameters, but they don't exist by default.
 */
 
-FVector4 ULayeredMaterialLibrary::GetMaterialChannelMaskParameterValue(UMaterialInstance* Instance, FName ParameterName, EMaterialParameterAssociation Association)
+FVector4 ULayeredMaterialLibrary::GetMaterialInstanceChannelMaskParameterValue(UMaterialInstance* Instance, FName ParameterName, EMaterialParameterAssociation Association)
 {
     FLinearColor Result = FLinearColor(0, 0, 0, 0);
     if (Instance)
@@ -326,7 +326,7 @@ FVector4 ULayeredMaterialLibrary::GetMaterialChannelMaskParameterValue(UMaterial
     return FVector4(Result.R, Result.G, Result.B, Result.A);
 }
 
-bool ULayeredMaterialLibrary::SetMaterialChannelMaskParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, FVector4 Value, EMaterialParameterAssociation Association)
+bool ULayeredMaterialLibrary::SetMaterialInstanceChannelMaskParameterValue(UMaterialInstanceConstant* Instance, FName ParameterName, FVector4 Value, EMaterialParameterAssociation Association)
 {
     if (Instance)
     {
