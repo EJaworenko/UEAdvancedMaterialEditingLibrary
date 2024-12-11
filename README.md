@@ -21,7 +21,8 @@ Note: All versions of this plugin use the same source files.
 - [Installation](#installation)
 - [Usage](#usage)
   - [Python Library](#python-library)
-  - [Blueprint Usage](#blueprint-usage)
+  - [Blueprints](#blueprints)
+  - [Example Usage:](#example-usage)
 - [Simple(ish) Python Example](#simpleish-python-example)
 - [Prerequisites](#prerequisites)
 - [License](#license)
@@ -75,21 +76,21 @@ the plugin is added to your project, you can access it via:
 
 `from layered_material_library import LayeredMaterialLibrary`
 
-### Blueprint Usage
+### Blueprints
 
 The plugin provides the following Blueprint nodes for Editor Utility Widgets:
 
 ![Blueprint Nodes](docs/images/blueprint_nodes.png)
 
-Example usage:
-```blueprint
-// Basic layer manipulation example
-Get Material Instance
-IsLayeredMaterial -> Branch
--> True -> GetLayerCount
--> AddMaterialLayer
--> AssignLayerMaterial
-```
+### Example Usage:
+
+This example would check if a material is layered, if it is, add a new material layer, get the count, and assign
+a specific material layer asset to it.
+
+Note: These blueprint nodes are ONLY available in Editor Utility Widgets because they adjust elements in-editor,
+not in-game.
+
+![Blueprint Example](docs/images/blueprint_example.png)
 
 ## Simple(ish) Python Example
 
