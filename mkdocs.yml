@@ -1,7 +1,7 @@
 site_name: UE Advanced Material Editing Library
 site_description: Documentation for the UE Advanced Material Editing Library plugin
-repo_url: https://github.com/EJaworenko/UEAdvancedMaterialEditingLibrary
-repo_name: EJaworenko/UEAdvancedMaterialEditingLibrary
+repo_url: https://github.com/edwardmakesthings/UEAdvancedMaterialEditingLibrary
+repo_name: edwardmakesthings/UEAdvancedMaterialEditingLibrary
 
 theme:
   name: material
@@ -111,7 +111,7 @@ extra:
       link: https://jaworenko.design
       name: My Website
     - icon: fontawesome/brands/github
-      link: https://github.com/EJaworenko
+      link: https://github.com/edwardmakesthings
       name: My Github
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/edwardmakesthings

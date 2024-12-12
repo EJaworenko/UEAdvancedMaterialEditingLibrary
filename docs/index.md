@@ -2,7 +2,7 @@
 # UE Advanced Material Editing Library
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/EJaworenko/UEAdvancedMaterialEditingLibrary)](https://github.com/EJaworenko/UEAdvancedMaterialEditingLibrary/releases)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/edwardmakesthings/UEAdvancedMaterialEditingLibrary)](https://github.com/edwardmakesthings/UEAdvancedMaterialEditingLibrary/releases)
 [![Unreal Engine](https://img.shields.io/badge/Unreal%20Engine-5.5-blue)](https://www.unrealengine.com/)
 
 A Unreal Engine 5 plugin that provides functionality to edit material layer and material blend layer parameters through both Python and Blueprints.
@@ -10,7 +10,7 @@ A Unreal Engine 5 plugin that provides functionality to edit material layer and 
 <!-- omit in toc -->
 ## Compatibility
 
-Builds/binaries are provided in the [releases](https://github.com/EJaworenko/UEAdvancedMaterialEditingLibrary/releases) page for UE5.1 to UE5.5.
+Builds/binaries are provided in the [releases](https://github.com/edwardmakesthings/UEAdvancedMaterialEditingLibrary/releases) page for UE5.1 to UE5.5.
 
 Note: All versions of this plugin use the same source files.
 
@@ -33,8 +33,8 @@ Note: All versions of this plugin use the same source files.
 
 View our (to be) comprehensive documentation including:
 
-- [API Reference](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary/reference/core/exceptions) - Comprehensive documentation for Python API
-- [Git Guide for Beginners](https://ejaworenko.github.io/Node-Weaver/git-guide) - Version control basics explained simply (different project)
+- [API Reference](https://edwardmakesthings.github.io/UEAdvancedMaterialEditingLibrary/reference/core/exceptions) - Comprehensive documentation for Python API
+- [Git Guide for Beginners](https://edwardmakesthings.github.io/Node-Weaver/git-guide) - Version control basics explained simply (different project)
 
 
 ## Features
@@ -179,13 +179,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 The project is small, I'm not sure it can expand much but feel free to contribute! If you're new to open source check out:
 
-1. My [Git Guide](https://ejaworenko.github.io/Node-Weaver/git-guide) for version control basics
+1. My [Git Guide](https://edwardmakesthings.github.io/Node-Weaver/git-guide) for version control basics
 2. GitHub's guide on [Creating a Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
-3. The [issues page](https://github.com/EJaworenko/UEAdvancedMaterialEditingLibrary/issues) for beginner-friendly tasks
+3. The [issues page](https://github.com/edwardmakesthings/UEAdvancedMaterialEditingLibrary/issues) for beginner-friendly tasks
 
 ## Getting Help
 
-- [Open an issue](https://github.com/EJaworenko/Node-Weaver/issues) for bugs or feature requests
-- Check [troubleshooting](https://ejaworenko.github.io/UEAdvancedMaterialEditingLibrary/troubleshooting) for common issues
+- [Open an issue](https://github.com/edwardmakesthings/Node-Weaver/issues) for bugs or feature requests
+- Check [troubleshooting](https://edwardmakesthings.github.io/UEAdvancedMaterialEditingLibrary/troubleshooting) for common issues
 - Review existing issues before creating new ones
 - Don't hesitate to ask questions - I'm here to help!
